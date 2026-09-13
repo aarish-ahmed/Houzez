@@ -23,14 +23,14 @@ export const addPropertyApi = async (propertyData) => {
 
 export const getPropertyApi = async () => {
   try {
-    const res = await axios.get(
-      `${API_URL}/api/properties/all`
-    );
+    const res = await axios.get(`${API_URL}/api/properties/all`);
 
+    // Ensure the returned data is an array
     const properties = res.data;
-    return properties;
+    return Array.isArray(properties) ? properties : [];
   } catch (error) {
-    console.error(error);
+    console.error("Failed to fetch properties:", error?.response?.data || error.message);
+    return []; // Return an empty array so consumers never receive undefined
   }
 };
 
