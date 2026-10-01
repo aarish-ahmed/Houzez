@@ -1,5 +1,6 @@
 import cloudinary from "../lib/cloudinary.js";
 import prisma from "../lib/prisma.js";
+import redis from "../lib/redis.js";
 
 
 const createProperty = async (req, res) => {
@@ -50,7 +51,8 @@ const createProperty = async (req, res) => {
         images: imageUrls,
       },
     });
-   
+   await redis.del("properties:all");
+
     
     return res.status(201).json({
       property: newProperty,

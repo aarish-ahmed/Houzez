@@ -1,5 +1,6 @@
 import cloudinary from "../lib/cloudinary.js";
 import prisma from "../lib/prisma.js";
+import redis from "../lib/redis.js";
 
 const addBlog = async (req, res) => {
   try {
@@ -41,6 +42,8 @@ const addBlog = async (req, res) => {
         coverImage,
       },
     });
+    await redis.del("blogs:all");
+
    console.log(newBlog)
     return res.status(201).json({
       blog: newBlog,
