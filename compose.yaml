@@ -1,16 +1,13 @@
 services:
   client:
-    build:
-      context: ./client
-      args:
-        NEXT_PUBLIC_API_URL: http://server:5000
+    image: aarish96/houzez-client:latest
     ports:
       - "3000:3000"
     depends_on:
       - server
 
   server:
-    build: ./server
+    image: aarish96/houzez-server:latest
     ports:
       - "5000:5000"
     env_file:
