@@ -1,0 +1,11 @@
+xhouzez.duckdns.org {
+    # Route API requests to the backend server
+    handle /api/* {
+        reverse_proxy server:5000
+    }
+
+    # Route everything else to the frontend client
+    handle {
+        reverse_proxy client:3000
+    }
+}
